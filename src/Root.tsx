@@ -7,6 +7,8 @@ import { MonogramSpin } from "./compositions/MonogramSpin";
 import { defaultMonogramSpinProps, monogramSpinSchema } from "./compositions/MonogramSpin/schema";
 import { CCLoopSpin } from "./compositions/CCLoopSpin";
 import { defaultCCLoopSpinProps, ccLoopSpinSchema } from "./compositions/CCLoopSpin/schema";
+import { CCLoopSpinSimple } from "./compositions/CCLoopSpinSimple";
+import { defaultCCLoopSpinSimpleProps, ccLoopSpinSimpleSchema } from "./compositions/CCLoopSpinSimple/schema";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -50,6 +52,16 @@ export const RemotionRoot: React.FC = () => {
         height={1080}
         schema={ccLoopSpinSchema}
         defaultProps={defaultCCLoopSpinProps}
+      />
+      <Composition
+        id="CCLoopSpinSimple"
+        component={CCLoopSpinSimple}
+        durationInFrames={300}
+        fps={30}
+        width={1920}
+        height={1080}
+        schema={ccLoopSpinSimpleSchema}
+        defaultProps={defaultCCLoopSpinSimpleProps}
       />
     </>
   );
