@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate, Sequence, staticFile } from "remotion";
+import { AbsoluteFill, useCurrentFrame, useVideoConfig, Sequence, staticFile } from "remotion";
 import { GreenScreenComposite } from "../../skills/compositing";
 import { useSkills } from "../../skills";
 import { ProductCompositeProps } from "./schema";
@@ -20,24 +20,12 @@ export const ProductComposite: React.FC<ProductCompositeProps> = ({
   keyColor,
   similarity,
   smoothness,
-  productX,
-  productY,
-  productScale,
   promoText,
   promoColor,
 }) => {
   const frame = useCurrentFrame();
-  const { fps, durationInFrames } = useVideoConfig();
+  const { fps } = useVideoConfig();
   const { transitions, effects } = useSkills();
-
-  // Animate product entrance
-  const productOpacity = transitions.fadeIn(frame, { durationInFrames: fps });
-  const productScaleAnim = interpolate(
-    frame,
-    [0, fps],
-    [0.8, productScale],
-    { extrapolateRight: "clamp" }
-  );
 
   // Promo text animation
   const textOpacity = transitions.fadeIn(Math.max(0, frame - fps), { durationInFrames: fps });
@@ -56,12 +44,7 @@ export const ProductComposite: React.FC<ProductCompositeProps> = ({
             similarity,
             smoothness,
           }}
-          foregroundPosition={{
-            x: productX,
-            y: productY,
-            scale: productScaleAnim,
-          }}
-          style={{ opacity: productOpacity }}
+          preservePosition={true}
         />
       ) : (
         // Placeholder when no assets provided

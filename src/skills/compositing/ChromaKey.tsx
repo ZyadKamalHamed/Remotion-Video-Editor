@@ -165,7 +165,9 @@ interface GreenScreenCompositeProps {
   foregroundIsVideo?: boolean;
   /** Chroma key configuration */
   chromaKey?: ChromaKeyConfig;
-  /** Foreground position */
+  /** Keep the foreground at its original position (full frame overlay) */
+  preservePosition?: boolean;
+  /** Foreground position (only used if preservePosition is false) */
   foregroundPosition?: {
     x?: number | string;
     y?: number | string;
@@ -184,6 +186,7 @@ export const GreenScreenComposite: React.FC<GreenScreenCompositeProps> = ({
   foregroundSrc,
   foregroundIsVideo = true,
   chromaKey = {},
+  preservePosition = true,
   foregroundPosition = {},
   style,
 }) => {
@@ -202,20 +205,32 @@ export const GreenScreenComposite: React.FC<GreenScreenCompositeProps> = ({
       </div>
 
       {/* Foreground Layer (Green Screen) */}
-      <div
-        style={{
-          position: "absolute",
-          left: typeof x === "number" ? x : x,
-          top: typeof y === "number" ? y : y,
-          transform: `translate(-50%, -50%) scale(${scale})`,
-        }}
-      >
-        <ChromaKeyCanvas
-          src={foregroundSrc}
-          isVideo={foregroundIsVideo}
-          {...chromaKey}
-        />
-      </div>
+      {preservePosition ? (
+        // Full frame overlay - keeps product at original position from green screen video
+        <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}>
+          <ChromaKeyCanvas
+            src={foregroundSrc}
+            isVideo={foregroundIsVideo}
+            {...chromaKey}
+          />
+        </div>
+      ) : (
+        // Custom positioning
+        <div
+          style={{
+            position: "absolute",
+            left: typeof x === "number" ? x : x,
+            top: typeof y === "number" ? y : y,
+            transform: `translate(-50%, -50%) scale(${scale})`,
+          }}
+        >
+          <ChromaKeyCanvas
+            src={foregroundSrc}
+            isVideo={foregroundIsVideo}
+            {...chromaKey}
+          />
+        </div>
+      )}
     </div>
   );
 };
