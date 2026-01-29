@@ -3,6 +3,8 @@ import { PromoVideo } from "./compositions/PromoVideo";
 import { defaultPromoVideoProps, promoVideoSchema } from "./compositions/PromoVideo/schema";
 import { ProductComposite } from "./compositions/ProductComposite";
 import { defaultProductCompositeProps, productCompositeSchema } from "./compositions/ProductComposite/schema";
+import { MonogramSpin } from "./compositions/MonogramSpin";
+import { defaultMonogramSpinProps, monogramSpinSchema } from "./compositions/MonogramSpin/schema";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -26,6 +28,16 @@ export const RemotionRoot: React.FC = () => {
         height={1080}
         schema={productCompositeSchema}
         defaultProps={defaultProductCompositeProps}
+      />
+      <Composition
+        id="MonogramSpin"
+        component={MonogramSpin}
+        durationInFrames={300}
+        fps={30}
+        width={1920}
+        height={1080}
+        schema={monogramSpinSchema}
+        defaultProps={defaultMonogramSpinProps}
       />
     </>
   );
