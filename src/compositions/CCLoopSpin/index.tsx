@@ -26,10 +26,11 @@ export const CCLoopSpin: React.FC<CCLoopSpinProps> = ({
   const { fps } = useVideoConfig();
 
   // Calculate rotation angles
-  // Loop A spins right (clockwise) - positive rotation
+  // Loop A spins right (clockwise) - positive rotation, starts at 0°
   const rotationA = (frame / fps) * spinSpeed * 360;
-  // Loop B spins left (counter-clockwise) - negative rotation
-  const rotationB = -((frame / fps) * spinSpeed * 360);
+  // Loop B spins left (counter-clockwise) - negative rotation, starts at 180° offset
+  // The offset makes them visually out of phase so opposite directions are clear
+  const rotationB = 180 - ((frame / fps) * spinSpeed * 360);
 
   return (
     <AbsoluteFill>
