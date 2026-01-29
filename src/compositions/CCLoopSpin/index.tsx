@@ -29,7 +29,6 @@ export const CCLoopSpin: React.FC<CCLoopSpinProps> = ({
   // Loop A spins right (clockwise) - positive rotation, starts at 0°
   const rotationA = (frame / fps) * spinSpeed * 360;
   // Loop B spins left (counter-clockwise) - negative rotation, starts at 180° offset
-  // The offset makes them visually out of phase so opposite directions are clear
   const rotationB = 180 - ((frame / fps) * spinSpeed * 360);
 
   return (
@@ -62,45 +61,55 @@ export const CCLoopSpin: React.FC<CCLoopSpinProps> = ({
         </AbsoluteFill>
       )}
 
-      {/* Layer 3: CC Loop A - Spinning Right (Clockwise) */}
-      {showLoopA && (
-        <AbsoluteFill
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Img
-            src={staticFile(loopASrc)}
+      {/* 3D Perspective Container for both loops */}
+      <AbsoluteFill
+        style={{
+          perspective: 1200,
+          perspectiveOrigin: "center center",
+        }}
+      >
+        {/* Layer 3: CC Loop A - Spinning Right (Clockwise) - Positioned forward */}
+        {showLoopA && (
+          <AbsoluteFill
             style={{
-              objectFit: "contain",
-              transform: `rotateY(${rotationA}deg)`,
-              transformOrigin: "center center",
-              backfaceVisibility: "visible",
+              justifyContent: "center",
+              alignItems: "center",
+              transformStyle: "preserve-3d",
             }}
-          />
-        </AbsoluteFill>
-      )}
+          >
+            <Img
+              src={staticFile(loopASrc)}
+              style={{
+                objectFit: "contain",
+                transform: `translateZ(50px) rotateY(${rotationA}deg)`,
+                transformOrigin: "center center",
+                backfaceVisibility: "visible",
+              }}
+            />
+          </AbsoluteFill>
+        )}
 
-      {/* Layer 4: CC Loop B - Spinning Left (Counter-Clockwise) */}
-      {showLoopB && (
-        <AbsoluteFill
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Img
-            src={staticFile(loopBSrc)}
+        {/* Layer 4: CC Loop B - Spinning Left (Counter-Clockwise) - Positioned back */}
+        {showLoopB && (
+          <AbsoluteFill
             style={{
-              objectFit: "contain",
-              transform: `rotateY(${rotationB}deg)`,
-              transformOrigin: "center center",
-              backfaceVisibility: "visible",
+              justifyContent: "center",
+              alignItems: "center",
+              transformStyle: "preserve-3d",
             }}
-          />
-        </AbsoluteFill>
-      )}
+          >
+            <Img
+              src={staticFile(loopBSrc)}
+              style={{
+                objectFit: "contain",
+                transform: `translateZ(-50px) rotateY(${rotationB}deg)`,
+                transformOrigin: "center center",
+                backfaceVisibility: "visible",
+              }}
+            />
+          </AbsoluteFill>
+        )}
+      </AbsoluteFill>
     </AbsoluteFill>
   );
 };
