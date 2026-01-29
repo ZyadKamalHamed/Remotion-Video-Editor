@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate, Sequence } from "remotion";
+import { AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate, Sequence, staticFile } from "remotion";
 import { GreenScreenComposite } from "../../skills/compositing";
 import { useSkills } from "../../skills";
 import { ProductCompositeProps } from "./schema";
@@ -47,9 +47,9 @@ export const ProductComposite: React.FC<ProductCompositeProps> = ({
       {/* Green Screen Composite */}
       {backgroundSrc && productSrc ? (
         <GreenScreenComposite
-          backgroundSrc={backgroundSrc}
+          backgroundSrc={staticFile(backgroundSrc)}
           backgroundIsVideo={backgroundIsVideo}
-          foregroundSrc={productSrc}
+          foregroundSrc={staticFile(productSrc)}
           foregroundIsVideo={productIsVideo}
           chromaKey={{
             keyColor,

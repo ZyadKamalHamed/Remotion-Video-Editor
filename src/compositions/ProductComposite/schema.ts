@@ -30,16 +30,16 @@ export const productCompositeSchema = z.object({
 export type ProductCompositeProps = z.infer<typeof productCompositeSchema>;
 
 export const defaultProductCompositeProps: ProductCompositeProps = {
-  backgroundSrc: "",
+  backgroundSrc: "assets/backgrounds/Untitled.mp4",
   backgroundIsVideo: true,
-  productSrc: "",
+  productSrc: "assets/products/Chair-on-green-screen.mp4",
   productIsVideo: true,
   keyColor: "#00ff00",
   similarity: 0.4,
   smoothness: 0.1,
   productX: "50%",
-  productY: "50%",
-  productScale: 1,
+  productY: "60%",
+  productScale: 0.8,
   promoText: undefined,
   promoColor: "#ffffff",
 };
