@@ -67,22 +67,17 @@ export const CCLoopSpin: React.FC<CCLoopSpinProps> = ({
           style={{
             justifyContent: "center",
             alignItems: "center",
-            perspective: 1000,
           }}
         >
-          <div
+          <Img
+            src={staticFile(loopASrc)}
             style={{
-              transformStyle: "preserve-3d",
+              objectFit: "contain",
               transform: `rotateY(${rotationA}deg)`,
+              transformOrigin: "center center",
+              backfaceVisibility: "visible",
             }}
-          >
-            <Img
-              src={staticFile(loopASrc)}
-              style={{
-                objectFit: "contain",
-              }}
-            />
-          </div>
+          />
         </AbsoluteFill>
       )}
 
@@ -92,22 +87,17 @@ export const CCLoopSpin: React.FC<CCLoopSpinProps> = ({
           style={{
             justifyContent: "center",
             alignItems: "center",
-            perspective: 1000,
           }}
         >
-          <div
+          <Img
+            src={staticFile(loopBSrc)}
             style={{
-              transformStyle: "preserve-3d",
+              objectFit: "contain",
               transform: `rotateY(${rotationB}deg)`,
+              transformOrigin: "center center",
+              backfaceVisibility: "visible",
             }}
-          >
-            <Img
-              src={staticFile(loopBSrc)}
-              style={{
-                objectFit: "contain",
-              }}
-            />
-          </div>
+          />
         </AbsoluteFill>
       )}
     </AbsoluteFill>
