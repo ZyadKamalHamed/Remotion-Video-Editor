@@ -9,6 +9,8 @@ import { CCLoopSpin } from "./compositions/CCLoopSpin";
 import { defaultCCLoopSpinProps, ccLoopSpinSchema } from "./compositions/CCLoopSpin/schema";
 import { CCLoopSpinSimple } from "./compositions/CCLoopSpinSimple";
 import { defaultCCLoopSpinSimpleProps, ccLoopSpinSimpleSchema } from "./compositions/CCLoopSpinSimple/schema";
+import { CCLoopSpinDiagonal } from "./compositions/CCLoopSpinDiagonal";
+import { defaultCCLoopSpinDiagonalProps, ccLoopSpinDiagonalSchema } from "./compositions/CCLoopSpinDiagonal/schema";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -62,6 +64,16 @@ export const RemotionRoot: React.FC = () => {
         height={1080}
         schema={ccLoopSpinSimpleSchema}
         defaultProps={defaultCCLoopSpinSimpleProps}
+      />
+      <Composition
+        id="CCLoopSpinDiagonal"
+        component={CCLoopSpinDiagonal}
+        durationInFrames={300}
+        fps={30}
+        width={1920}
+        height={1080}
+        schema={ccLoopSpinDiagonalSchema}
+        defaultProps={defaultCCLoopSpinDiagonalProps}
       />
     </>
   );
